@@ -1,0 +1,45 @@
+
+.container{
+    display: grid;
+    grid-template-columns: [h1] 300px [h2] auto [h3] 300px [h4];
+    grid-template-rows: [l1] 150px [l2] auto [l3];
+    width: 100%;
+    height: 900px;
+    background-image:url('https://static.runoob.com/images/mix/paper.gif');
+	background-color:#cccccc;
+}
+h1{
+    text-align: center;
+}
+h2{
+    text-align: center;
+}
+p{
+    text-align: center;
+}
+.title{
+    grid-column-start: h1;
+    grid-column-end: h4;
+
+}
+.left{
+    grid-column-start: h1;
+    grid-column-end: h2;
+    grid-row-start: l2;
+    grid-row-end: l3;
+    border: 2px solid black;
+ 
+}
+.right{
+    grid-column-start: h3;
+    grid-column-end: h4;
+    grid-row-start: l2;
+    grid-row-end: l3;
+    border: 2px solid black;
+}
+.center{
+    grid-column-start: h2;
+    grid-column-end: h3;
+    grid-row-start: l2;
+    grid-row-end: l3;
+}
