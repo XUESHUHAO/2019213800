@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #back {
+            width: 1080px;
+            height: 720px;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            border: 4px solid black;
+        }
+        
+        #back>img {
+            height: 100%;
+            width: 100%;
+        }
+        
+        #bird_container {
+            width: 100px;
+            height: 80px;
+            position: absolute;
+            transition: all 0.1s;
+            transition-timing-function: linear;
+        }
+        
+        #bird_image {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .column_container {
+            position: absolute;
+            width: 130px;
+            transition: all 0.1s;
+            transition-timing-function: linear;
+        }
+        
+        .column_image {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="back">
+        <img src="img/back.png" alt="">
+    </div>
+
+
+
+</body>
+<script>
+    var back = document.getElementById("back")
+    var player = new Bird()
+
+    function Bird() {
+
+        this.creat = function() {
+            var bird_container = document.createElement('div');
+            var bird_image = document.createElement('img');
+            var bird_collision = document.createElement('div');
+            bird_container.id = 'bird_container'
+            bird_image.id = 'bird_image';
+            bird_image.src = "img/bird.png"
+            bird_collision.id = "bird_collision"
+            bird_container.appendChild(bird_image)
+            bird_container.appendChild(bird_collision)
+            back.appendChild(bird_container)
+            bird_container.style.top = '250px';
+            bird_container.style.left = '160px';
+            return bird_container
+        }
+
+        this.bird = this.creat()
+
+        this.jump = function() {
+            this.bird.style.top = (parseFloat(this.bird.style.top) - 150) + "px"
+        }
+        this.drop = function() {
+            var dropping = setInterval(() => {
+                this.bird.style.top = (parseFloat(this.bird.style.top) + 20) + "px";
+                if (parseFloat(this.bird.style.top) + 80 - 20 >= 720) {
+
+                    gameover()
+
+                }
+            }, 50);
+
+        }
+
+
+
+
+
+
+
+
+    }
+
+
+    function Column(size) {
+        this.creat = function(size) {
+            var column_container = document.createElement('div')
+            var column_image = document.createElement('img');
+            column_container.className = 'column_container'
+            column_image.className = 'column_image'
+            back.appendChild(column_container)
+            column_container.appendChild(column_image);
+            column_container.style.left = "1080px";
+
+            switch (size) {
+                case 1:
+                    column_container.style.height = '200px'
+                    column_image.src = "img/01.png"
+                    break;
+                case 2:
+                    column_container.style.height = '250px'
+                    column_image.src = "img/02.png"
+                    break;
+                case 3:
+                    column_container.style.height = '300px'
+                    column_image.src = "img/03.png"
+                    break;
+                case 4:
+                    column_container.style.height = '350px'
+                    column_image.src = "img/04.png"
+                    break;
+            }
+            if (Math.ceil(Math.random() * 10) > 5) {
+                column_container.style.top = "0px"
+                this.type = "top";
+                column_container.style.transform = "rotate(180deg)"
+            } else {
+                column_container.style.top = (720 - (parseFloat(column_container.style.height))) + "px"
+                this.type = "bottom"
+            }
+            return column_container
+        }
+
+        this.column = this.creat(size)
+        this.type;
+        this.distory = function() {
+            this.column.remove()
+        }
+
+        //this.move = function() {
+        //        this.column.style.left = "0px"
+        //    }
+        this.move = function() {
+            setInterval(() => {
+                this.column.style.left = (parseFloat(this.column.style.left) - 20) + "px";
+                if (parseFloat(this.column.style.left) <= -20) {
+                    this.distory();
+
+                }
+                if (this.collision()) {
+
+                    gameover()
+                }
+
+            }, 100);
+
+        }
+
+        this.collision = function() {
+            var col_left = parseFloat(this.column.style.left) + 20
+            var col_right = col_left + 130
+            var col_top = parseFloat(this.column.style.top)
+            var col_bottom = col_top + parseFloat(this.column.style.height)
+            var bird_top = parseFloat(player.bird.style.top)
+            var bird_bottom = bird_top + 80
+            var bird_left = 170;
+            var bird_right = 280;
+
+            if (this.type == "top") {
+                if (bird_top <= col_bottom && col_left <= bird_right && col_right >= bird_left) {
+                    return true
+                    console.log(col_left, col_right, bird_left, bird_right)
+                } else {
+                    return false
+                }
+            } else if (this.type == "bottom") {
+                if (bird_bottom >= col_top && col_left <= bird_right && col_right >= bird_left) {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        }
+    }
+
+    function gameover() {
+
+        window.location = "game.html"
+    }
+
+    function initgame() {
+
+        player.drop()
+        document.addEventListener("keypress", function(event) {
+            if (event.keyCode == 32) {
+                player.jump()
+            }
+        })
+        setInterval(() => {
+
+            Math.ceil(Math.random() * 10)
+            new Column(Math.ceil(Math.random() * 4)).move()
+        }, 2000);
+
+    }
+
+
+    document.addEventListener("keypress", function(event) {
+        if (event.keyCode == 13) {
+            initgame()
+        }
+    })
+    setTimeout(() => {
+        alert("按下回车键开始游戏")
+    }, 200);
+</script>
+
+</html>

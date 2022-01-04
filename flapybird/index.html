@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #back {
+            width: 1080px;
+            height: 720px;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            border: 4px solid black;
+        }
+        
+        #back>img {
+            height: 100%;
+            width: 100%;
+        }
+        
+        .title {
+            position: absolute;
+            top: 130px;
+            left: 238px;
+        }
+        
+        button {
+            position: absolute;
+            top: 285px;
+            left: 435px;
+            width: 160px;
+            height: 60px;
+            background-color: rgb(170, 255, 255);
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+        
+        button:hover {
+            background-color: rgb(196, 250, 250);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="back">
+        <img src="img/back.png" alt="">
+    </div>
+    <img class="title" src="img/title.png" alt="">
+
+    <button onclick="window.location='game.html'">开始游戏</button>
+    <button style="top:360px">游戏规则</button>
+</body>
+
+</html>
