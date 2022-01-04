@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="course.css">
+    <script src="ce.js" defer></script>
+    <title>薛殳浩的课表</title>
+</head>
+
+<body>
+<div class="all">
+    <div class="choice">
+        <button id ='np'>单周</button>
+        <button id ='mp'>双周</button>
+    </div>
+    <div class="course">
+        <div></div>
+        <div>周一  周二  周三  周四  周五  周六  周日 </div>
+        
+        <div>1-2</div>
+        <div></div>
+        <div id="c1">Web程序设计</div>
+        <div> </div>
+        <div id="c2"></div>
+        <div id="c3">操作系统原理</div>
+        <div> </div>
+        <div> </div>
+        <div>3-4</div>
+        <div id="c4">微机原理</div>
+        <div> </div>
+        <div id="c5">操作系统原理</div>
+        <div id="c6">习思想</div>
+        <div> </div>
+        <div> </div>
+        <div> </div>
+        <div>5-6</div>
+        <div></div>
+        <div id="c7">西方古典音乐鉴赏</div>
+        <div id="c8">进化社会科学概论</div>
+        <div id="c9">web程序设计</div>
+        <div> </div>
+        <div> </div>
+        <div> </div>
+        <div>7-8</div>
+        <div> </div>
+        <div id="c10">信息检索技术</div>
+        <div id="c11"></div>
+        <div id="c12">编译原理</div>
+        <div> </div>
+        <div> </div>
+        <div> </div>
+        <div>9-10</div>
+        <div> </div>
+        <div> </div>
+        <div> </div>
+        <div> </div>
+        <div> </div>
+        <div> </div>
+        <div> </div>
+
+    </div>
+    <div class="introdaction">
+        <div id="teacher">请点击“单周”或“双周”开始课表的相关信息显示</div>
+        <div id="time"></div>
+        <div id="location"></div>
+    </div>
+</div>
+</body>
+<script>
+    const Teacher2 = ["杨青","张茂元","陈怡","张茂元","张艳斌","孙正国","罗力群","涂新辉","张茂元","张茂元","杨青"];
+const Teacher = ["涂新辉","张茂元","张茂元","陈怡","张茂元","张艳斌","孙正国","罗力群","涂新辉","张茂元","杨青"];
+const Time = ["8:00~9:40","8:00~9:40","10:10~11:50","10:10~11:50","10:10~11:50","14:00~15:40","14:00~15:40","14:00~15:40","16:10~17:50","16:10~17:50","16:10~17:50"]
+const Location = ["n520","n524","n113","n213","n215","n301","8108","n108","n108","n113","n208"]
+const Time2 = ["8:00~9:40","8:00~9:40","8:00~9:40","10:10~11:50","10:10~11:50","10:10~11:50","14:00~15:40","14:00~15:40","14:00~15:40","16:10~17:50","16:10~17:50"]
+const Location2 = ["n520","n528","n524","n113","n213","n215","n301","8108","n108","n108","n208"]
+id1 = ["1","3","4","5","6","7","8","9","10","11","12"]
+id2 = ["1","2","3","4","5","6","7","8","9","10","12"]
+const week = document.getElementById('mp')
+const te = document.getElementById('teacher');
+const ti = document.getElementById('time');
+const lo = document.getElementById('location');
+function clickbutton1(event){
+    const course1 = document.getElementById('c1')
+    const course2 = document.getElementById('c2')
+    const course3 = document.getElementById('c11')
+    course1.innerHTML = '编译原理'
+    course2.innerHTML = ''
+    course3.innerHTML = '微机原理'
+    course2.style.backgroundColor = '#c4f1ed';
+    const botton2 = document.getElementById('mp')
+    const botton1 = event.currentTarget;
+    botton1.style.backgroundColor = '#fd6c13';
+    botton2.style.backgroundColor = '#c4f1ed';
+
+    for(let i = 0;i < 11;i++){
+        function mouseover(event) {
+            const course = event.currentTarget; //必须要
+            if(course.innerHTML != ''){
+                te.innerHTML = "任课教师："+Teacher2[i];
+                ti.innerHTML = "上课时间："+Time[i];
+                lo.innerHTML = "上课地点："+Location[i];
+
+            }
+
+        }
+
+        function mouseout(event) {
+            const course = event.currentTarget; //必须要
+            if(course.innerHTML != ''){
+                te.innerHTML = "任课教师："+'';
+                ti.innerHTML = "上课时间："+'';
+                lo.innerHTML = "上课地点："+'';}
+        }
+        const course = document.getElementById('c'+id1[i]);
+        course.style.backgroundColor = '#b0ecb1';
+        course.addEventListener('mouseover',mouseover)
+        course.addEventListener('mouseout',mouseout)
+    }
+}
+
+function clickbutton2(event){
+    const course1 = document.getElementById('c1')
+    const course2 = document.getElementById('c2')
+    const course3 = document.getElementById('c11')
+
+
+    course1.innerHTML = 'Web程序设计'
+    course2.innerHTML = '信息检索技术'
+    course3.innerHTML = ''
+    course3.style.backgroundColor = '#c4f1ed';
+
+    const botton1 = document.getElementById('np')
+    const botton2 = event.currentTarget;
+    botton2.style.backgroundColor = '#fd6c13';
+    botton1.style.backgroundColor = '#c4f1ed';
+
+    for(let i = 0;i < 11;i++){
+        function mouseover1(event) {
+            const course = event.currentTarget; //必须要
+            if(course.innerHTML != ''){
+                te.innerHTML = "任课教师："+Teacher[i];
+                ti.innerHTML = "上课时间："+Time2[i];
+                lo.innerHTML = "上课地点："+Location2[i];}
+
+        }
+        function mouseout1(event) {
+            const course = event.currentTarget; //必须要
+            if(course.innerHTML != ''){
+                te.innerHTML = "任课教师："+'';
+                ti.innerHTML = "上课时间："+'';
+                lo.innerHTML = "上课地点："+'';}
+        }
+        const course = document.getElementById('c'+id2[i]);
+        course.style.backgroundColor = '#b0ecb1'
+        course.addEventListener('mouseover',mouseover1)
+        course.addEventListener('mouseout',mouseout1)
+    }
+}
+const botton2 = document.getElementById('mp')
+const botton1 = document.getElementById('np')
+botton1.addEventListener('click',clickbutton1)
+botton2.addEventListener('click',clickbutton2)
+</script>
+</html>
